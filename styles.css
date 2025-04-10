@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* === Basic CSS === */
+=======
+/* === Basic style css === */
+>>>>>>> main
 body {
     font-family: Helvetica, sans-serif;
     font-size: 16px;
@@ -27,4 +31,8 @@ body {
   
   .container {
     padding: 20px;
+<<<<<<< HEAD
   }
+=======
+  }
+>>>>>>> main
