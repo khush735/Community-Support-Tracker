@@ -3,7 +3,7 @@
 A web application for PiXELL River Financial to track community support activities including donations, volunteer hours, and event participation.
 
 Features:
-- Donation Tracker: Record and manage charitable donations
+- Donation Tracker: Record and manage charitable donations/
 - Volunteer Hours Tracker: Log and track employee volunteer work
 - Event Signup: Register for community events
 
