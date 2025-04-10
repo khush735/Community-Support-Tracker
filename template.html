@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Support Tracker | PiXELL River</title>
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Shared Header -->
+    <header>
+        <div class="header-content">
+            <h1>PiXELL River Financial</h1>
+            <p>Community Support Tracker</p>
+        </div>
+    </header>
+
+    <!-- Shared Navigation -->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="donation.html" class="nav-link">Donations</a></li>
+            <li><a href="volunteer.html" class="nav-link">Volunteer Hours</a></li>
+            <li><a href="event.html" class="nav-link">Event Signup</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area (To be replaced by each component) -->
+
+
+    <!-- Form Sign up - Part 3 -->
+    <main id="main-content">
+        <section class="community-event-signup">
+            <h2>Event Signup Form</h2>
+            <p>Register for an upcoming community event!</p>
+    
+            <form id="event-signup-form">
+                <label for="event-name">Event Name:</label>
+                <input type="text" id="event-name" name="event_name" required>
+    
+                <label for="rep-name">Company Representatives Name:</label>
+                <input type="text" id="rep-name" name="representative_name" required>
+    
+                <label for="rep-email">Representatives Email:</label>
+                <input type="email" id="rep-email" name="representative_email" required>
+    
+                <label for="role">Select Role:</label>
+                <select id="role" name="company_role" required>
+                    <option value="">--Select a company role--</option>
+                    <option value="sponsor">Sponsor</option>
+                    <option value="participant">Participant</option>
+                    <option value="organizer">Organizer</option>
+                </select>
+    
+                <button type="submit">Submit Your Registration!</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>
