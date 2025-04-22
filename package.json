@@ -1,0 +1,14 @@
+{
+    "name": "donation",
+    "version": "1.0.0",
+    "description": "Donation Tracker for PiXELL River",
+    "main": "donation.js",
+    "scripts": {
+      "test": "jest"
+    },
+    "author": "Khush Patel",
+    "license": "ISC",
+    "devDependencies": {
+      "jest": "^29.7.0"
+    }
+  }
