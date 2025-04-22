@@ -179,6 +179,22 @@ nav {
   margin-bottom: 1rem;
 }
 
+form {
+  width: 100%;
+  max-width: 500px;  
+  margin-left: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+form label {
+  display: block;
+  font-weight: bold;  
+  margin-bottom: 5px;  
+}
+
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 768px) {
   .menu-toggle {

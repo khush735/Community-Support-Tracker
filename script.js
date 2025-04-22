@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
         addToSignupTable(signup);
         // Saves the signup data to memory storage
         saveSignups(signup);
-        updateRoleSignups();
+        updateRoleSummary();
 
         console.log("Form data:", signup); // Displays data in the console
         // Confirmation message
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
         row.querySelector(".delete-btn").addEventListener("click", () => {
             row.remove();
             deleteSignups(signupData.id);
-            updateRoleSignups();
+            updateRoleSummary();
         });
 
         tableBody.appendChild(row);
@@ -89,10 +89,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadSignups() {
         const storedSignups = JSON.parse(localStorage.getItem("signups")) || [];
         storedSignups.forEach(addToSignupTable);
-        updateRoleSignups();
+        updateRoleSummary();
     }
 
-    function updateRoleSignups() {
+    function updateRoleSummary() {
         const storedSignups = JSON.parse(localStorage.getItem("signups")) || [];
 
         const summary = {
@@ -102,8 +102,9 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         storedSignups.forEach(signup => {
-            if (summary[signup.companyRole]) {
-                summary[signup.companyRole]++;
+            const role = signup.companyRole.toLowerCase(); // lowercase
+            if (summary[role] !== undefined) {
+                summary[role]++;
             }
         });
 
