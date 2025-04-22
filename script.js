@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         saveSignups(signup);
         updateRoleSignups();
 
-        console.log("Form data:", formData); // Displays data in the console
+        console.log("Form data:", signup); // Displays data in the console
         // Confirmation message
         alert("Thank you for signing up to one of our exciting events!");
         // Clears the form
@@ -89,6 +89,33 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadSignups() {
         const storedSignups = JSON.parse(localStorage.getItem("signups")) || [];
         storedSignups.forEach(addToSignupTable);
-        updateRoleSummary();
+        updateRoleSignups();
+    }
+
+    function updateRoleSignups() {
+        const storedSignups = JSON.parse(localStorage.getItem("signups")) || [];
+
+        const summary = {
+            sponsor: 0,
+            participant: 0,
+            organizer: 0
+        };
+
+        storedSignups.forEach(signup => {
+            if (summary[signup.companyRole]) {
+                summary[signup.companyRole]++;
+            }
+        });
+
+        document.getElementById("role-summary").innerHTML = `
+            <h3>Upcoming Events: Role Breakdown</h3>
+            <ul>
+                <li><strong>Sponsors:</strong> ${summary.sponsor}</li>
+                <li><strong>Participants:</strong> ${summary.participant}</li>
+                <li><strong>Organizers:</strong> ${summary.organizer}</li>
+            </ul>
+        
+        `;
+        
     }
 });
