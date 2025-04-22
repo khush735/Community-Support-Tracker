@@ -170,6 +170,15 @@ nav {
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
+.mobile-menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 768px) {
   .menu-toggle {

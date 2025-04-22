@@ -39,17 +39,13 @@ document.addEventListener("DOMContentLoaded", function () {
         
         // Adds signup data to the table
         addToSignupTable(signup);
-
         // Saves the signup data to memory storage
         saveSignups(signup);
-
         updateRoleSignups();
 
         console.log("Form data:", formData); // Displays data in the console
-
         // Confirmation message
         alert("Thank you for signing up to one of our exciting events!");
-
         // Clears the form
         form.reset();
     };
@@ -70,39 +66,29 @@ document.addEventListener("DOMContentLoaded", function () {
         
         row.querySelector(".delete-btn").addEventListener("click", () => {
             row.remove();
-            saveSignups(); // save after a deletion
+            deleteSignups(signupData.id);
+            updateRoleSignups();
         });
 
         tableBody.appendChild(row);
     }
 
     // Save the signups to localStorage
-    function saveSignups() {
-        const signups = [];
-        const rows = document.querySelectorAll("#signup-table tbody tr");
-
-        rows.forEach((row) => {
-            const cells = row.getElementsByTagName("td");
-            const signup = {
-                eventName: cells[0].innerText,
-                representativeName: cells[1].innerText,
-                representativeEmail: cells[2].innerText,
-                companyRole: cells[3].innerText
-            };
-            signups.push(signup);
-        });
-
+    function saveSignups(signup) {
+        let signups = JSON.parse(localStorage.getItem("signups")) || [];
+        signups.push(signup);
         localStorage.setItem("signups", JSON.stringify(signups));
     }
 
-    // Load signups from local storage and then populate the table
-    function loadSignups() {
-        const storedSignups = JSON.parse(localStorage.getItem("signups"));
-        if (storedSignups) {
-            storedSignups.forEach((signup) => {
-                addToSignupTable(signup);
+    function deleteSignups(id) {
+        let signups = JSON.parse(localStorage.getItem("signups")) || [];
+        signups = signups.filter(s => s.id !== id);
+        localStorage.setItem("signups", JSON.stringify(signups));
+    }
 
-            });
-        }
+    function loadSignups() {
+        const storedSignups = JSON.parse(localStorage.getItem("signups")) || [];
+        storedSignups.forEach(addToSignupTable);
+        updateRoleSummary();
     }
 });
