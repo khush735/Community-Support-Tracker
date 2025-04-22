@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Get the form by the ID
     var form = document.getElementById("event-signup-form");
 
+    loadSignups();
+
     form.onsubmit = function (event) {
         event.preventDefault(); // Prevent the form from submitting early
 
@@ -26,15 +28,24 @@ document.addEventListener("DOMContentLoaded", function () {
             return; // Exit the function if the email is invalid
         }
 
-        // Stores the data in an object
-        var formData = {
-            eventName: eventName,
+        // Stores the data, and gives the instance a unique ID for tracking
+        const signup = {
+            id: Date.now(), // Unique ID for tracking
+            eventName,
             representativeName: repName,
             representativeEmail: repEmail,
             companyRole: role
         };
+        
+        // Adds signup data to the table
+        addToSignupTable(signup);
 
-        console.log("Form data:", formData); // Display data in the console
+        // Saves the signup data to memory storage
+        saveSignups(signup);
+
+        updateRoleSignups();
+
+        console.log("Form data:", formData); // Displays data in the console
 
         // Confirmation message
         alert("Thank you for signing up to one of our exciting events!");
@@ -42,4 +53,56 @@ document.addEventListener("DOMContentLoaded", function () {
         // Clears the form
         form.reset();
     };
+
+        // Function to add the submission to the signup table.
+    function addToSignupTable(signupData) {
+        const tableBody = document.querySelector("#signup-table tbody");
+        
+        const row = document.createElement("tr");
+        
+        row.innerHTML = `
+            <td>${signupData.eventName}</td>
+            <td>${signupData.representativeName}</td>
+            <td>${signupData.representativeEmail}</td>
+            <td>${signupData.companyRole}</td>
+            <td><button class="delete-btn">Delete</button></td>
+        `;
+        
+        row.querySelector(".delete-btn").addEventListener("click", () => {
+            row.remove();
+            saveSignups(); // save after a deletion
+        });
+
+        tableBody.appendChild(row);
+    }
+
+    // Save the signups to localStorage
+    function saveSignups() {
+        const signups = [];
+        const rows = document.querySelectorAll("#signup-table tbody tr");
+
+        rows.forEach((row) => {
+            const cells = row.getElementsByTagName("td");
+            const signup = {
+                eventName: cells[0].innerText,
+                representativeName: cells[1].innerText,
+                representativeEmail: cells[2].innerText,
+                companyRole: cells[3].innerText
+            };
+            signups.push(signup);
+        });
+
+        localStorage.setItem("signups", JSON.stringify(signups));
+    }
+
+    // Load signups from local storage and then populate the table
+    function loadSignups() {
+        const storedSignups = JSON.parse(localStorage.getItem("signups"));
+        if (storedSignups) {
+            storedSignups.forEach((signup) => {
+                addToSignupTable(signup);
+
+            });
+        }
+    }
 });
