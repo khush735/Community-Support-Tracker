@@ -1,0 +1,11 @@
+[33m1a6c209[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mkhush[m[33m)[m khush: Update the donation.html
+[33m894bdab[m[33m ([m[1;31morigin/khush[m[33m)[m Update primary color variable in styles.css for consistency
+[33ma3b36aa[m Fix text color variable in styles.css for consistency
+[33mee314a5[m Your message about the changes
+[33ma2dedd3[m Add donation tracking feature with validation and UI
+[33mb35816f[m Fix navigation links in template.html to match correct file names
+[33maf86cd0[m Update README.md with project description, features, team members, and usage instructions
+[33mdbbc87b[m Student1-Khush: Add initial HTML template and desktop.ini configuration
+[33mba88c3c[m Merge pull request #1 from khush735/Part3-Ashley
+[33mc0dccb1[m[33m ([m[1;31morigin/Part3-Ashley[m[33m, [m[1;32mPart3-Ashley[m[33m)[m Branch Part3-Ashley added basic CSS
+[33mc681d20[m Initial commit
