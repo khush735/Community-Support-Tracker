@@ -4,11 +4,12 @@
     "description": "Donation Tracker for PiXELL River",
     "main": "donation.js",
     "scripts": {
-      "test": "jest"
+        "test": "jest"
     },
     "author": "Khush Patel",
     "license": "ISC",
     "devDependencies": {
-      "jest": "^29.7.0"
+        "jest": "^29.7.0",
+        "jest-environment-jsdom": "^29.7.0"
     }
-  }
+}

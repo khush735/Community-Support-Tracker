@@ -1,4 +1,4 @@
-const donations = [];
+let donations = JSON.parse(localStorage.getItem("donations")) || [];
 
 function validateDonation(charityName, amount, date) {
     const errors = [];
@@ -9,34 +9,72 @@ function validateDonation(charityName, amount, date) {
     return errors;
 }
 
-// Browser-specific code
+function renderDonations() {
+    const tableBody = document.getElementById("donationTableBody");
+    const summary = document.getElementById("donationSummary");
+
+    tableBody.innerHTML = "";
+    let total = 0;
+
+    donations.forEach((donation, index) => {
+        total += donation.amount;
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${donation.charityName}</td>
+            <td>$${donation.amount.toFixed(2)}</td>
+            <td>${donation.date}</td>
+            <td>${donation.comment}</td>
+            <td><button onclick="deleteDonation(${index})">Delete</button></td>
+        `;
+        tableBody.appendChild(row);
+    });
+
+    summary.textContent = `Total Donated: $${total.toFixed(2)}`;
+}
+
+function deleteDonation(index) {
+    donations.splice(index, 1);
+    localStorage.setItem("donations", JSON.stringify(donations));
+    renderDonations();
+}
+
 if (typeof document !== 'undefined') {
-    document.getElementById("donationForm")?.addEventListener("submit", (e) => {
-        e.preventDefault();
-        
-        const formData = {
-            charityName: document.getElementById("charityName").value,
-            amount: parseFloat(document.getElementById("amount").value),
-            date: document.getElementById("date").value,
-            comment: document.getElementById("comment").value
-        };
+    document.addEventListener("DOMContentLoaded", () => {
+        renderDonations();
 
-        const errors = validateDonation(formData.charityName, formData.amount, formData.date);
-        const errorContainer = document.getElementById("errorContainer");
+        document.getElementById("donationForm")?.addEventListener("submit", (e) => {
+            e.preventDefault();
 
-        if (errors.length > 0) {
-            errorContainer.innerHTML = errors.join("<br>");
-            errorContainer.style.display = "block";
-        } else {
-            donations.push(formData);
-            e.target.reset();
-            errorContainer.style.display = "none";
-            alert("Donation recorded!");
-        }
+            const formData = {
+                charityName: document.getElementById("charityName").value,
+                amount: parseFloat(document.getElementById("amount").value),
+                date: document.getElementById("date").value,
+                comment: document.getElementById("comment").value
+            };
+
+            const errors = validateDonation(formData.charityName, formData.amount, formData.date);
+            const errorContainer = document.getElementById("errorContainer");
+
+            if (errors.length > 0) {
+                errorContainer.innerHTML = errors.join("<br>");
+                errorContainer.style.display = "block";
+            } else {
+                donations.push(formData);
+                localStorage.setItem("donations", JSON.stringify(donations));
+                e.target.reset();
+                errorContainer.style.display = "none";
+                renderDonations();
+            }
+        });
     });
 }
 
-module.exports = {
-    validateDonation,
-    donations
-};
+if (typeof module !== 'undefined') {
+    module.exports = {
+        validateDonation,
+        deleteDonation,
+        renderDonations,
+        donations
+    };
+}
